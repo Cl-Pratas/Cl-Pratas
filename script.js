@@ -174,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
 let estoque = {
   "borboleta": 1,
   "colar-são-bento": 2,
+  "colar-de-luxo": 2,
   "pingente-cravejado-redondo": 2,
   "pingente-sao-bento": 2,
   "brinco-cravejado-rosa-quadrado": 1,
@@ -381,126 +382,15 @@ document.getElementById("painel-admin").style.display = "none";
 
 
 
-let editandoIndice = null;
 
-document.addEventListener("keydown", function(e) {
- if (e.ctrlKey && e.key.toLowerCase() === "p")
-    e.preventDefault();
-    const painel = document.getElementById("painel-admin");
-    painel.style.display = painel.style.display === "none" ? "block" : "none";
-    carregarListaProdutosAdmin();
-  }
-);
 
-function salvarProduto() {
-  const nome = document.getElementById("nomeProduto").value;
-  const preco = parseFloat(document.getElementById("precoProduto").value);
-  const imagemInput = document.getElementById("imagemProduto");
-  const categoria = document.getElementById("categoriaProduto").value;
-  const estoque = parseInt(document.getElementById("estoqueProduto").value);
 
-  let imagem = imagemInput.value;
 
-  if (imagemInput.files && imagemInput.files[0]) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      imagem = e.target.result;
-      processarProduto(nome, preco, imagem, estoque, categoria);
-    };
-    reader.readAsDataURL(imagemInput.files[0]);
-  } else {
-    processarProduto(nome, preco, imagem, estoque, categoria);
-  }
-}
 
-function processarProduto(nome, preco, imagem, estoque, categoria) {
-  if (!nome || isNaN(preco) || !imagem || isNaN(estoque)) {
-    alert("Preencha todos os campos corretamente.");
-    return;
-  }
 
-  const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
-  const novoProduto = { nome, preco, imagem, estoque, categoria };
 
-  if (editandoIndice !== null) {
-    produtos[editandoIndice] = novoProduto;
-    editandoIndice = null;
-  } else {
-    produtos.push(novoProduto);
-  }
 
-  localStorage.setItem("produtos", JSON.stringify(produtos));
-  alert("Produto salvo!");
-  limparFormularioAdmin();
-  carregarListaProdutosAdmin();
-  renderizarProdutosNaLoja();
-}
 
-function carregarListaProdutosAdmin() {
-  const lista = document.getElementById("listaProdutos");
-  const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
-  lista.innerHTML = produtos.map((p, i) => `
-    <div style="margin-bottom: 10px;">
-      <strong>${p.nome}</strong> - R$ ${p.preco.toFixed(2)} - Estoque: ${p.estoque} - ${p.categoria}
-      <button onclick="editarProduto(${i})">Editar</button>
-      <button onclick="removerProduto(${i})">Remover</button>
-    </div>
-  `).join("");
-}
 
-function editarProduto(index) {
-  const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
-  const p = produtos[index];
-  document.getElementById("nomeProduto").value = p.nome;
-  document.getElementById("precoProduto").value = p.preco;
-  document.getElementById("estoqueProduto").value = p.estoque;
-  document.getElementById("categoriaProduto").value = p.categoria;
-  editandoIndice = index;
-}
 
-function removerProduto(index) {
-  const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
-  produtos.splice(index, 1);
-  localStorage.setItem("produtos", JSON.stringify(produtos));
-  carregarListaProdutosAdmin();
-  renderizarProdutosNaLoja();
-}
 
-function limparFormularioAdmin() {
-  document.getElementById("nomeProduto").value = "";
-  document.getElementById("precoProduto").value = "";
-  document.getElementById("imagemProduto").value = "";
-  document.getElementById("estoqueProduto").value = "";
-  document.getElementById("categoriaProduto").value = "anel";
-}
-
-function renderizarProdutosNaLoja() {
-  const container = document.getElementById("produtos-loja");
-  if (!container) return;
-
-  const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
-  const categorias = {};
-
-  produtos.forEach(p => {
-    if (!categorias[p.categoria]) categorias[p.categoria] = [];
-    categorias[p.categoria].push(p);
-  });
-
-  container.innerHTML = Object.keys(categorias).map(cat => `
-    <h2 style="margin-top: 30px;">${cat.toUpperCase()}</h2>
-    <div class="produtos-grid">
-      ${categorias[cat].map(p => `
-        <div class="produto-card">
-          <img src="${p.imagem}" alt="${p.nome}">
-          <h3>${p.nome}</h3>
-          <p>R$ ${p.preco.toFixed(2)}</p>
-          <button onclick="adicionarAoCarrinho('${p.nome}', ${p.preco}, '${p.imagem}')">Adicionar ao Carrinho</button>
-        </div>
-      `).join("")}
-    </div>
-  `).join("");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderizarProdutosNaLoja();
-});
