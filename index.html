@@ -105,6 +105,7 @@
     Adicionar ao Carrinho
   </button>
 </div>
+
   <div class="produto-card">
   <img src="img-produto/coloar_02.jpeg" alt="Colar São Bento"
        onclick="abrirModal('img-produto/coloar_02.jpeg', 'Colar São Bento', 'Peça exclusiva: colar São Bento pingente de São Bento + corrente pipoca 50 cm em prata 925.', 'R$ 155,00')">
@@ -116,6 +117,22 @@
     Adicionar ao Carrinho
   </button>
 </div>
+
+
+
+<div class="produto-card">
+  <img src="img-produto/colar de luxo.jpeg" alt="Colar de Luxo"
+       onclick="abrirModal('img-produto/colar de luxo.jpeg', 'Colar de Luxo', 'Colar elegante com pingente de luxo. Valor total: R$125,00 (pingente R$85,00)', 'R$ 125,00')">
+  <h3>Colar Flor de Luxo</h3>
+  <p class="preco">R$ 125,00</p>
+  <p id="estoque-colar-de-luxo" class="estoque" style="display: none;">Estoque: 2</p>
+  <button id="btn-colar-de-luxo" class="btn-add"
+          onclick="adicionarAoCarrinhoComEstoque('Colar de Luxo', 125.00, 'img-produto/colar de luxo.jpeg', 'colar-de-luxo')">
+    Adicionar ao Carrinho
+  </button>
+</div>
+
+
 
 <div class="produto-card">
   <img src="img-produto/pigente.jpeg" alt="Pingente cravejado redondo"
@@ -407,7 +424,7 @@
 </div>
 <div class="produto-card">
   <img src="img-produto/pigente do sol do amor.jpeg" alt="Pingente do sol do amor"
-       onclick="abrirModal('img-produto/pingente do sol do amor.jpeg', 'Pingente do sol do amor', 'Peça exclusiva: Pingente do sol do amor. Material de alta qualidade e acabamento refinado.', 'R$ 65.90')">
+       onclick="abrirModal('img-produto/pigente do sol do amor.jpeg', 'Pingente do sol do amor', 'Peça exclusiva: Pingente do sol do amor. Material de alta qualidade e acabamento refinado.', 'R$ 65.90')">
   <h3>Pingente do sol do amor</h3>
   <p class="preco">R$ 65,90</p>
   <p id="estoque-pingente-do-sol-do-amor" class="estoque" style="display: none;">3</p>
@@ -515,16 +532,18 @@
 </div>
 
 <div class="produto-card">
-  <img src="img-produto/tornozeleira.jpeg" alt="Tornozeleira delicada"
+  <img src="img-produto/tornozeleira.jpeg" alt="Tornozeleira Concha"
        onclick="abrirModal('img-produto/tornozeleira.jpeg', 'Tornozeleira delicada', 'Peça exclusiva: Tornozeleira delicada. Material de alta qualidade, leve e confortável para o dia a dia.', 'R$ 49.90')">
-  <h3>Tornozeleira delicada</h3>
+  <h3>Tornozeleira Concha</h3>
   <p class="preco">R$ 49,90</p>
   <p id="estoque-tornozeleira-delicada" class="estoque" style="display: none;">3</p>
   <button id="btn-tornozeleira-delicada" class="btn-add"
-          onclick="adicionarAoCarrinhoComEstoque('Tornozeleira delicada', 49.90, 'img-produto/tornozeleira.jpeg', 'tornozeleira-delicada')">
+          onclick="adicionarAoCarrinhoComEstoque('Tornozeleira Concha', 49.90, 'img-produto/tornozeleira.jpeg', 'tornozeleira-delicada')">
     Adicionar ao Carrinho
   </button>
 </div>
+
+
 
 
 
@@ -611,13 +630,6 @@
 
 
 
-<div id="painel-admin" style="position:fixed;bottom:20px;left:20px;z-index:9999;background:#fff;padding:15px;border:1px solid #ccc;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,0.1);">
-  <h4>🔧 Repor Estoque</h4>
-  <input type="text" id="idProduto" placeholder="ID do produto" style="margin-bottom:5px;width:100%;padding:6px;">
-  <input type="number" id="novaQuantidade" placeholder="Nova quantidade" style="margin-bottom:5px;width:100%;padding:6px;">
-  <button onclick="reporEstoqueProduto()" style="width:100%;padding:8px;background:#0a0;color:#fff;border:none;border-radius:5px;">Repor Estoque</button>
-</div>
-
 
 
 
@@ -642,54 +654,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Painel de Administração -->
-<div id="painel-admin" style="display: none; background: #f9f9f9; padding: 20px; border: 2px solid #ccc; border-radius: 8px; margin: 20px;">
-  <h2>Painel de Administração</h2>
-
-  <label>Nome:</label>
-  <input type="text" id="nomeProduto"><br><br>
-
-  <label>Preço:</label>
-  <input type="number" id="precoProduto" step="0.01"><br><br>
-
-  <label>Imagem (URL ou upload):</label>
-  <input type="file" id="imagemProduto" accept="image/*"><br><br>
-
-  <label>Categoria:</label>
-  <select id="categoriaProduto">
-    <option value="anel">Anel</option>
-    <option value="colar">Colar</option>
-    <option value="pulseira">Pulseira</option>
-    <option value="brinco">Brinco</option>
-    <option value="outros">Outros</option>
-  </select><br><br>
-
-  <label>Estoque:</label>
-  <input type="number" id="estoqueProduto"><br><br>
-
-  <button onclick="salvarProduto()">Salvar Produto</button>
-
-  <h3 style="margin-top: 20px;">Produtos cadastrados:</h3>
-  <div id="listaProdutos"></div>
-</div>
-
-<!-- Container de Produtos na Loja -->
-<div id="produtos-loja" class="produtos-grid"></div>
 
 
 </body>
