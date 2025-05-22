@@ -993,28 +993,3 @@ main {
 
 
 
-.produto-card {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-  background: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.produto-card img {
-  max-width: 100%;
-  border-radius: 6px;
-}
-.produtos-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start;
-}
-@media (max-width: 600px) {
-  .produtos-grid {
-    flex-direction: column;
-  }
-}
-
